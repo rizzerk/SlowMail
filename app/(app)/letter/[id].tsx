@@ -1,0 +1,125 @@
+import { useEffect, useState } from 'react';
+import {
+  View, Text, StyleSheet, TouchableOpacity,
+  ScrollView, Alert, ActivityIndicator
+} from 'react-native';
+import { router, useLocalSearchParams } from 'expo-router';
+import api from '../../../lib/api';
+import { Colors, envelopeColors } from '../../../lib/theme';
+
+export default function LetterScreen() {
+  const { id } = useLocalSearchParams<{ id: string }>();
+  const [letter, setLetter] = useState<any>(null);
+  const [kept, setKept]     = useState(false);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    api.get('/mailbox').then(({ data }) => {
+      const found = data.find((l: any) => String(l.id) === id);
+      if (found) { setLetter(found); setKept(found.kept); }
+      setLoading(false);
+    }).catch(() => setLoading(false));
+  }, [id]);
+
+  const handleKeep = async () => {
+    try {
+      await api.post(`/letters/${id}/keep`);
+      setKept(true);
+      Alert.alert('📚 Kept', 'This letter is saved to your desk.');
+    } catch {
+      Alert.alert('Error', 'Could not keep letter.');
+    }
+  };
+
+  const handleThrow = async () => {
+    Alert.alert('Throw away?', 'This letter will be gone forever.', [
+      { text: 'Cancel', style: 'cancel' },
+      {
+        text: 'Throw', style: 'destructive', onPress: async () => {
+          await api.post(`/letters/${id}/throw`).catch(() => {});
+          router.back();
+        }
+      },
+    ]);
+  };
+
+  if (loading) return <View style={styles.center}><ActivityIndicator /></View>;
+  if (!letter) return (
+    <View style={styles.center}>
+      <Text style={styles.mono}>Letter not found.</Text>
+      <TouchableOpacity onPress={() => router.back()}><Text style={styles.back}>← back</Text></TouchableOpacity>
+    </View>
+  );
+
+  const bgColor = envelopeColors[letter.envelope_style] ?? Colors.parchment;
+
+  return (
+    <View style={[styles.container, { backgroundColor: bgColor }]}>
+      {/* Top bar */}
+      <View style={styles.topBar}>
+        <TouchableOpacity onPress={() => router.back()} style={styles.closeBtn}>
+          <Text style={styles.redX}>✕</Text>
+        </TouchableOpacity>
+        <View style={styles.iconBtn}>
+          <Text style={{ fontSize: 26 }}>⚙️</Text>
+        </View>
+        <View style={[styles.profileBtn]}>
+          <Text style={styles.profileText}>👤</Text>
+        </View>
+      </View>
+
+      {/* Letter paper */}
+      <ScrollView style={styles.paperScroll} contentContainerStyle={styles.paperContent}>
+        <View style={styles.paper}>
+          <Text style={styles.heartIcon}>🩷</Text>
+          <Text style={styles.bodyText}>{letter.body}</Text>
+          <Text style={styles.fromLine}>— {letter.from}</Text>
+        </View>
+      </ScrollView>
+
+      {/* Actions */}
+      <View style={styles.actions}>
+        {kept ? (
+          <View style={styles.keptNote}>
+            <Text style={styles.keptNoteText}>📚 saved to desk</Text>
+          </View>
+        ) : (
+          <>
+            <TouchableOpacity style={[styles.actionBtn, styles.throwBtn]} onPress={handleThrow}>
+              <Text style={styles.actionBtnText}>Throw</Text>
+            </TouchableOpacity>
+            <TouchableOpacity style={[styles.actionBtn, styles.keepBtn]} onPress={handleKeep}>
+              <Text style={styles.actionBtnText}>Keep</Text>
+            </TouchableOpacity>
+          </>
+        )}
+      </View>
+    </View>
+  );
+}
+
+const styles = StyleSheet.create({
+  container:   { flex: 1 },
+  center:      { flex: 1, justifyContent: 'center', alignItems: 'center', backgroundColor: Colors.cream },
+  mono:        { fontFamily: 'monospace', fontSize: 14, color: Colors.darkInk },
+  back:        { fontFamily: 'monospace', fontSize: 13, color: Colors.mutedInk, marginTop: 10, textDecorationLine: 'underline' },
+  topBar:      { flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', paddingTop: 56, paddingHorizontal: 20, paddingBottom: 12 },
+  closeBtn:    { padding: 4 },
+  redX:        { fontSize: 22, color: Colors.redX, fontWeight: 'bold' },
+  iconBtn:     { padding: 4 },
+  profileBtn:  { backgroundColor: Colors.yellow, borderRadius: 8, borderWidth: 2, borderColor: Colors.darkInk, width: 38, height: 38, justifyContent: 'center', alignItems: 'center' },
+  profileText: { fontSize: 18 },
+  paperScroll: { flex: 1, marginHorizontal: 20, marginBottom: 8 },
+  paperContent:{ paddingBottom: 16 },
+  paper:       { backgroundColor: Colors.cream, borderWidth: 2, borderColor: Colors.darkInk, borderRadius: 4, padding: 20, minHeight: 400 },
+  heartIcon:   { position: 'absolute', top: 14, right: 14, fontSize: 22 },
+  bodyText:    { fontFamily: 'monospace', fontSize: 13, color: Colors.darkInk, lineHeight: 22, marginTop: 8 },
+  fromLine:    { fontFamily: 'monospace', fontSize: 13, color: Colors.darkInk, marginTop: 24, fontWeight: 'bold' },
+  actions:     { flexDirection: 'row', justifyContent: 'center', gap: 20, paddingVertical: 20, paddingHorizontal: 40 },
+  actionBtn:   { flex: 1, paddingVertical: 12, borderRadius: 24, alignItems: 'center', borderWidth: 2, borderColor: Colors.darkInk },
+  throwBtn:    { backgroundColor: Colors.throwRed },
+  keepBtn:     { backgroundColor: Colors.keepGreen },
+  actionBtnText:{ fontFamily: 'monospace', fontWeight: 'bold', fontSize: 15, color: Colors.darkInk },
+  keptNote:    { alignItems: 'center', padding: 12 },
+  keptNoteText:{ fontFamily: 'monospace', fontSize: 14, color: Colors.darkInk },
+});
