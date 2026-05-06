@@ -1,9 +1,13 @@
-import { useEffect, useState, useCallback } from 'react';
-import {
-  View, Text, StyleSheet, TouchableOpacity,
-  FlatList, RefreshControl, Alert
-} from 'react-native';
 import { router } from 'expo-router';
+import { useCallback, useEffect, useState } from 'react';
+import {
+  Alert,
+  FlatList, RefreshControl,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View
+} from 'react-native';
 import api, { clearAuth, getUser } from '../../lib/api';
 import { Colors, envelopeColors } from '../../lib/theme';
 
@@ -57,7 +61,7 @@ export default function MailboxScreen() {
         <TouchableOpacity onPress={() => Alert.alert('Settings', 'Coming soon')} style={styles.iconBtn}>
           <Text style={styles.icon}>⚙️</Text>
         </TouchableOpacity>
-        <TouchableOpacity onPress={logout} style={[styles.iconBtn, styles.profileBtn]}>
+        <TouchableOpacity onPress={() => router.push('/(app)/profile')} style={[styles.iconBtn, styles.profileBtn]}>
           <Text style={styles.profileText}>{user?.username?.[0]?.toUpperCase() ?? '?'}</Text>
         </TouchableOpacity>
       </View>
