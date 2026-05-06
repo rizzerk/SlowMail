@@ -1,9 +1,14 @@
 import { useState } from 'react';
 import {
-  View, Text, StyleSheet, TextInput, TouchableOpacity,
-  Alert, ActivityIndicator, KeyboardAvoidingView, Platform, ScrollView
+  ActivityIndicator,
+  Alert,
+  KeyboardAvoidingView, Platform, ScrollView,
+  StyleSheet,
+  Text,
+  TextInput, TouchableOpacity,
+  View
 } from 'react-native';
-import api from '../../lib/api';
+import { get, post } from '../../lib/api';
 import { Colors, envelopeColors } from '../../lib/theme';
 
 type Step = 'write' | 'envelope' | 'address';
@@ -20,7 +25,7 @@ export default function ComposeScreen() {
     setTo(q);
     if (q.length < 2) { setSuggestions([]); return; }
     try {
-      const { data } = await api.get(`/users/search?q=${q}`);
+      const { data } = await get('users/search', { q });
       setSuggestions(data);
     } catch {}
   };
@@ -30,11 +35,12 @@ export default function ComposeScreen() {
     if (!body.trim()) return Alert.alert('Empty letter', 'Write something first.');
     setLoading(true);
     try {
-      await api.post('/letters', { to, body, envelope_style: envelope });
+      await post('letters/send', { to, body, envelope_style: envelope });
       Alert.alert('📮 Sent!', 'Your letter is on its way. It will arrive tomorrow.');
       setBody(''); setTo(''); setStep('write'); setEnvelope('tan');
     } catch (e: any) {
-      Alert.alert('Error', e.response?.data?.message || 'Failed to send.');
+      console.log('SEND ERROR:', JSON.stringify(e.response?.data));
+      Alert.alert('Error', e.response?.data?.error || 'Failed to send.');
     } finally {
       setLoading(false);
     }
