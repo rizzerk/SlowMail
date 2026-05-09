@@ -1,5 +1,5 @@
-import { router } from 'expo-router';
-import { useCallback, useEffect, useState } from 'react';
+import { router, useFocusEffect } from 'expo-router';
+import { useCallback, useState } from 'react';
 import {
   Alert,
   FlatList, RefreshControl,
@@ -8,7 +8,7 @@ import {
   TouchableOpacity,
   View
 } from 'react-native';
-import api, { clearAuth, getUser } from '../../lib/api';
+import api, { clearAuth, get, getUser } from '../../lib/api';
 import { Colors, envelopeColors } from '../../lib/theme';
 
 type Letter = {
@@ -29,19 +29,25 @@ export default function MailboxScreen() {
   const load = useCallback(async () => {
     setLoading(true);
     try {
-      const { data } = await api.get('/mailbox');
+      const { data } = await get('mailbox');
+      console.log('MAILBOX DATA:', JSON.stringify(data));
       setLetters(data);
-    } catch {
-      // token expired
+    } catch (e: any) {
+      console.log('MAILBOX ERROR:', e.message, JSON.stringify(e.response?.data));
     } finally {
       setLoading(false);
     }
   }, []);
 
-  useEffect(() => {
-    getUser().then(setUser);
-    load();
-  }, []);
+  useFocusEffect(
+    useCallback(() => {
+      getUser().then(setUser);
+      load();
+  
+      // optional cleanup
+      return () => {};
+    }, [])
+  );
 
   const logout = async () => {
     await api.post('/auth/logout').catch(() => {});
@@ -94,7 +100,7 @@ export default function MailboxScreen() {
               <TouchableOpacity
                 style={[styles.envelope, { backgroundColor: envelopeColors[item.envelope_style] ?? Colors.parchment }]}
                 onPress={() => router.push(`/(app)/letter/${item.id}`)}
-              >
+                >
                 <View style={styles.envelopeInner}>
                   <Text style={styles.fromText}>from: {item.from}</Text>
                   <Text style={styles.previewText} numberOfLines={1}>

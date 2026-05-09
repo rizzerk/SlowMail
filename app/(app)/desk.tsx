@@ -1,9 +1,15 @@
-import { useEffect, useState, useCallback } from 'react';
+import { useFocusEffect } from 'expo-router';
+import { useCallback, useState } from 'react';
 import {
-  View, Text, StyleSheet, FlatList,
-  TouchableOpacity, RefreshControl, Alert
+  Alert,
+  FlatList,
+  RefreshControl,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View
 } from 'react-native';
-import api from '../../lib/api';
+import { get, post } from '../../lib/api';
 import { Colors, envelopeColors } from '../../lib/theme';
 
 export default function DeskScreen() {
@@ -14,20 +20,27 @@ export default function DeskScreen() {
   const load = useCallback(async () => {
     setLoading(true);
     try {
-      const { data } = await api.get('/desk');
+      const { data } = await get('desk');
+      console.log('DESK DATA:', JSON.stringify(data));
       setLetters(data);
-    } catch {}
-    finally { setLoading(false); }
+    } catch (e: any) {
+      console.log('DESK ERROR:', e.message);
+    } finally {
+      setLoading(false);
+    }
   }, []);
 
-  useEffect(() => { load(); }, []);
-
+  useFocusEffect(
+    useCallback(() => {
+      load();
+    }, [load])
+  );
   const throwFromDesk = async (id: number) => {
     Alert.alert('Remove from desk?', 'This will throw the letter away.', [
       { text: 'Cancel', style: 'cancel' },
       {
         text: 'Remove', style: 'destructive', onPress: async () => {
-          await api.post(`/letters/${id}/throw`).catch(() => {});
+          await post('letters/throw', {}, { id }).catch(() => {});
           setLetters(prev => prev.filter(l => l.id !== id));
         }
       },
