@@ -1,3 +1,4 @@
+import { useFocusEffect } from 'expo-router';
 import { useCallback, useState } from 'react';
 import {
   Alert,
@@ -21,6 +22,7 @@ export default function DeskScreen() {
     setLoading(true);
     try {
       const { data } = await get('desk');
+      console.log('DESK DATA:', JSON.stringify(data));
       setLetters(data);
     } catch (e: any) {
       console.log('DESK ERROR:', e.message);
@@ -29,7 +31,11 @@ export default function DeskScreen() {
     }
   }, []);
 
-  useFocusEffect(useCallback(() => { load(); }, [load]));
+  useFocusEffect(
+    useCallback(() => {
+      load();
+    }, [load])
+  );
 
   const throwLetter = async (id: number) => {
     Alert.alert('Move to Trash?', 'This letter will go to the trash.', [

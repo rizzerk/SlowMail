@@ -39,8 +39,8 @@ export default function ComposeScreen() {
       Alert.alert('📮 Sent!', 'Your letter is on its way. It will arrive tomorrow.');
       setBody(''); setTo(''); setStep('write'); setEnvelope('tan');
     } catch (e: any) {
-      console.log('SEND ERROR:', JSON.stringify(e.response?.data));
       Alert.alert('Error', e.response?.data?.error || 'Failed to send.');
+      console.log('SEND ERROR:', JSON.stringify(e.response?.data));
     } finally {
       setLoading(false);
     }

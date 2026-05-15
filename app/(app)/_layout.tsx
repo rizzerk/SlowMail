@@ -47,17 +47,13 @@ export default function AppLayout() {
         options={{ href: null }}
       />
       <Tabs.Screen
-  name="trash"
-  options={{
-    title: 'Trash',
-    tabBarIcon: () => <Text style={{ fontSize: 22 }}>🗑</Text>,
-  }}
-/>
-
-<Tabs.Screen
-  name="profile"
-  options={{ href: null, headerShown: false }}
-/>
+        name="trash"
+        options={{ href: null }}
+      />
+      <Tabs.Screen
+        name="profile"
+        options={{ href: null, headerShown: false }}
+      />
       {/* Hidden screens — not in tab bar */}
       <Tabs.Screen name="letter/[id]" options={{ href: null }} />
     </Tabs>
