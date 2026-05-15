@@ -1,8 +1,7 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import axios from 'axios';
 
-// ← Change this to your school server URL
-export const BASE = 'https://lostnfound.dcism.org/api/index.php';
+export const BASE = 'http://lostnfound.dcism.org/api/index.php';
 
 const api = axios.create({ baseURL: BASE });
 
@@ -18,10 +17,10 @@ api.interceptors.request.use(async (config) => {
 
 export default api;
 
-export const get = (route: string, params = {}) =>
+export const get = (route: string, params: Record<string, any> = {}) =>
   api.get('', { params: { route, ...params } });
 
-export const post = (route: string, data = {}, params = {}) =>
+export const post = (route: string, data: any = {}, params: Record<string, any> = {}) =>
   api.post('', data, { params: { route, ...params } });
 
 export const saveAuth = async (token: string, user: object) => {

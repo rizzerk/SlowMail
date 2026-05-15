@@ -1,5 +1,5 @@
 import { Tabs } from 'expo-router';
-import { Text } from 'react-native';
+import { Image } from 'react-native';
 import { Colors } from '../../lib/theme';
 
 export default function AppLayout() {
@@ -7,13 +7,13 @@ export default function AppLayout() {
     <Tabs
       screenOptions={{
         headerShown: false,
+        tabBarShowLabel: false,
         tabBarStyle: {
           backgroundColor: Colors.cream,
           borderTopWidth: 2,
           borderTopColor: Colors.darkInk,
-          height: 60,
+          height: 70,
         },
-        tabBarLabelStyle: { fontFamily: 'monospace', fontSize: 11 },
         tabBarActiveTintColor: Colors.darkInk,
         tabBarInactiveTintColor: Colors.mutedInk,
       }}
@@ -21,30 +21,30 @@ export default function AppLayout() {
       <Tabs.Screen
         name="mailbox"
         options={{
-          title: 'Mailbox',
-          tabBarIcon: ({ focused }) => <Text style={{ fontSize: 22 }}>{focused ? '📬' : '📭'}</Text>,
-        }}
-      />
-      <Tabs.Screen
-        name="compose"
-        options={{
-          title: 'Write',
-          tabBarIcon: () => <Text style={{ fontSize: 22 }}>✉️</Text>,
+          tabBarIcon: ({ focused }) => (
+            <Image source={focused ? require('../../assets/images/notempty.png') : require('../../assets/images/empty.png')} style={{ width: 40, height: 40, opacity: focused ? 1 : 0.4 }} />
+          ),
         }}
       />
       <Tabs.Screen
         name="desk"
         options={{
-          title: 'Desk',
-          tabBarIcon: () => <Text style={{ fontSize: 22 }}>📚</Text>,
+          tabBarIcon: ({ focused }) => (
+            <Image source={require('../../assets/images/desk.png')} style={{ width: 60, height: 60, opacity: focused ? 1 : 0.4 }} />
+          ),
+        }}
+      />
+      <Tabs.Screen
+        name="compose"
+        options={{
+          tabBarIcon: ({ focused }) => (
+            <Image source={require('../../assets/images/quillandink.png')} style={{ width: 60, height: 60, opacity: focused ? 1 : 0.4 }} />
+          ),
         }}
       />
       <Tabs.Screen
         name="outbox"
-        options={{
-          title: 'Outbox',
-          tabBarIcon: () => <Text style={{ fontSize: 22 }}>📤</Text>,
-        }}
+        options={{ href: null }}
       />
       <Tabs.Screen
   name="trash"
