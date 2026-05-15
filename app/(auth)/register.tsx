@@ -68,11 +68,11 @@ export default function RegisterScreen() {
 const styles = StyleSheet.create({
   bg:      { flex: 1, backgroundColor: Colors.skyBlue },
   scroll:  { flexGrow: 1, justifyContent: 'center', alignItems: 'center', padding: 24 },
-  card:    { backgroundColor: Colors.cream, borderRadius: 16, borderWidth: 2, borderColor: Colors.darkInk, padding: 28, width: '100%' },
-  title:   { fontFamily: 'monospace', fontSize: 24, fontWeight: 'bold', textAlign: 'center', marginBottom: 20, color: Colors.darkInk },
-  label:   { fontFamily: 'monospace', fontSize: 13, color: Colors.darkInk, marginBottom: 4 },
-  input:   { borderBottomWidth: 1.5, borderColor: Colors.darkInk, paddingVertical: 6, fontSize: 14, marginBottom: 16, color: Colors.darkInk },
-  btn:     { backgroundColor: Colors.yellow, borderRadius: 24, paddingVertical: 12, alignItems: 'center', borderWidth: 2, borderColor: Colors.darkInk, marginTop: 4 },
-  btnText: { fontFamily: 'monospace', fontWeight: 'bold', fontSize: 15, color: Colors.darkInk },
-  back:    { fontFamily: 'monospace', fontSize: 12, color: Colors.darkInk, textDecorationLine: 'underline' },
+  card:    { backgroundColor: Colors.cream, borderRadius: 32, borderWidth: 4, borderColor: Colors.darkInk, padding: 28, width: '100%' },
+  title:   { fontFamily: 'PressStart', fontSize: 16, textAlign: 'center', marginBottom: 24, color: Colors.darkInk },
+  label:   { fontFamily: 'PressStart', fontSize: 8, color: Colors.darkInk, marginBottom: 6 },
+  input:   { fontFamily: 'PressStart', borderBottomWidth: 3, borderColor: Colors.darkInk, paddingVertical: 8, fontSize: 10, marginBottom: 18, color: Colors.darkInk },
+  btn:     { backgroundColor: Colors.yellow, borderRadius: 28, paddingVertical: 14, alignItems: 'center', borderWidth: 3, borderColor: Colors.darkInk, marginTop: 4 },
+  btnText: { fontFamily: 'PressStart', fontSize: 9, color: Colors.darkInk },
+  back:    { fontFamily: 'PressStart', fontSize: 7, color: Colors.darkInk, textDecorationLine: 'underline' },
 });

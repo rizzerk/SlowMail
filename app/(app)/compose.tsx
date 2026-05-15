@@ -3,7 +3,7 @@ import {
   View, Text, StyleSheet, TextInput, TouchableOpacity,
   Alert, ActivityIndicator, KeyboardAvoidingView, Platform, ScrollView
 } from 'react-native';
-import api from '../../lib/api';
+import { get, post } from '../../lib/api';
 import { Colors, envelopeColors } from '../../lib/theme';
 
 type Step = 'write' | 'envelope' | 'address';
@@ -20,7 +20,7 @@ export default function ComposeScreen() {
     setTo(q);
     if (q.length < 2) { setSuggestions([]); return; }
     try {
-      const { data } = await api.get(`/users/search?q=${q}`);
+      const { data } = await get('users/search', { q });
       setSuggestions(data);
     } catch {}
   };
@@ -30,7 +30,7 @@ export default function ComposeScreen() {
     if (!body.trim()) return Alert.alert('Empty letter', 'Write something first.');
     setLoading(true);
     try {
-      await api.post('/letters', { to, body, envelope_style: envelope });
+      await post('letters/send', { to, body, envelope_style: envelope });
       Alert.alert('📮 Sent!', 'Your letter is on its way. It will arrive tomorrow.');
       setBody(''); setTo(''); setStep('write'); setEnvelope('tan');
     } catch (e: any) {
@@ -131,27 +131,27 @@ export default function ComposeScreen() {
 const styles = StyleSheet.create({
   container:      { flex: 1, backgroundColor: Colors.cream },
   topBar:         { flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', paddingTop: 56, paddingHorizontal: 20, paddingBottom: 12 },
-  title:          { fontFamily: 'monospace', fontWeight: 'bold', fontSize: 18, color: Colors.darkInk },
-  backText:       { fontFamily: 'monospace', fontSize: 13, color: Colors.mutedInk },
+  title:          { fontFamily: 'PressStart', fontWeight: 'bold', fontSize: 18, color: Colors.darkInk },
+  backText:       { fontFamily: 'PressStart', fontSize: 13, color: Colors.mutedInk },
   paper:          { flex: 1, margin: 16, borderWidth: 2, borderColor: Colors.darkInk, borderRadius: 4, backgroundColor: Colors.cream, padding: 16 },
-  letterInput:    { flex: 1, fontFamily: 'monospace', fontSize: 14, color: Colors.darkInk, lineHeight: 24, minHeight: 400 },
-  charCount:      { alignSelf: 'flex-end', fontFamily: 'monospace', fontSize: 11, color: Colors.mutedInk },
+  letterInput:    { flex: 1, fontFamily: 'PressStart', fontSize: 14, color: Colors.darkInk, lineHeight: 24, minHeight: 400 },
+  charCount:      { alignSelf: 'flex-end', fontFamily: 'PressStart', fontSize: 11, color: Colors.mutedInk },
   doneBtn:        { backgroundColor: Colors.pink, borderRadius: 24, marginHorizontal: 100, marginBottom: 32, paddingVertical: 12, alignItems: 'center', borderWidth: 2, borderColor: Colors.darkInk },
-  doneBtnText:    { fontFamily: 'monospace', fontWeight: 'bold', fontSize: 15, color: Colors.darkInk },
+  doneBtnText:    { fontFamily: 'PressStart', fontWeight: 'bold', fontSize: 15, color: Colors.darkInk },
   disabled:       { opacity: 0.5 },
   addressContent: { padding: 20, paddingBottom: 60 },
   envelopePreview:{ borderRadius: 14, borderWidth: 2, borderColor: Colors.darkInk, padding: 20, marginBottom: 16, minHeight: 120, justifyContent: 'space-between', flexDirection: 'row', alignItems: 'flex-end' },
   addrBlock:      { flex: 1 },
-  addrLabel:      { fontFamily: 'monospace', fontSize: 14, color: Colors.darkInk, fontWeight: 'bold' },
+  addrLabel:      { fontFamily: 'PressStart', fontSize: 14, color: Colors.darkInk, fontWeight: 'bold' },
   stampDecor:     { fontSize: 28 },
   envRow:         { flexDirection: 'row', gap: 10, marginBottom: 20 },
   envOption:      { flex: 1, borderRadius: 10, borderWidth: 2, borderColor: Colors.darkInk, padding: 10, alignItems: 'center' },
   envSelected:    { borderWidth: 3, borderColor: Colors.darkInk },
-  envLabel:       { fontFamily: 'monospace', fontSize: 11, color: Colors.darkInk },
-  toLabel:        { fontFamily: 'monospace', fontSize: 13, color: Colors.darkInk, marginBottom: 6 },
-  toInput:        { borderWidth: 1.5, borderColor: Colors.darkInk, borderRadius: 8, paddingHorizontal: 12, paddingVertical: 8, fontFamily: 'monospace', fontSize: 14, color: Colors.darkInk, marginBottom: 4 },
+  envLabel:       { fontFamily: 'PressStart', fontSize: 11, color: Colors.darkInk },
+  toLabel:        { fontFamily: 'PressStart', fontSize: 13, color: Colors.darkInk, marginBottom: 6 },
+  toInput:        { borderWidth: 1.5, borderColor: Colors.darkInk, borderRadius: 8, paddingHorizontal: 12, paddingVertical: 8, fontFamily: 'PressStart', fontSize: 14, color: Colors.darkInk, marginBottom: 4 },
   suggestion:     { backgroundColor: Colors.white, borderWidth: 1, borderColor: Colors.darkInk, borderRadius: 8, padding: 10, marginBottom: 4 },
-  suggestionText: { fontFamily: 'monospace', fontSize: 14, color: Colors.darkInk },
+  suggestionText: { fontFamily: 'PressStart', fontSize: 14, color: Colors.darkInk },
   mailBtn:        { backgroundColor: Colors.pink, borderRadius: 24, marginTop: 20, paddingVertical: 14, alignItems: 'center', borderWidth: 2, borderColor: Colors.darkInk },
-  mailBtnText:    { fontFamily: 'monospace', fontWeight: 'bold', fontSize: 15, color: Colors.darkInk },
+  mailBtnText:    { fontFamily: 'PressStart', fontWeight: 'bold', fontSize: 15, color: Colors.darkInk },
 });
