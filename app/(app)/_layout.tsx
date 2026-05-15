@@ -46,6 +46,14 @@ export default function AppLayout() {
         name="outbox"
         options={{ href: null }}
       />
+      <Tabs.Screen
+        name="trash"
+        options={{ href: null }}
+      />
+      <Tabs.Screen
+        name="profile"
+        options={{ href: null, headerShown: false }}
+      />
       {/* Hidden screens — not in tab bar */}
       <Tabs.Screen name="letter/[id]" options={{ href: null }} />
     </Tabs>

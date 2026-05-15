@@ -1,4 +1,5 @@
-import { useCallback, useEffect, useState } from 'react';
+import { useFocusEffect } from 'expo-router';
+import { useCallback, useState } from 'react';
 import {
   Alert,
   FlatList, Image,
@@ -21,12 +22,20 @@ export default function DeskScreen() {
     setLoading(true);
     try {
       const { data } = await get('desk');
+      console.log('DESK DATA:', JSON.stringify(data));
       setLetters(data);
-    } catch {}
-    finally { setLoading(false); }
+    } catch (e: any) {
+      console.log('DESK ERROR:', e.message);
+    } finally {
+      setLoading(false);
+    }
   }, []);
 
-  useEffect(() => { load(); }, []);
+  useFocusEffect(
+    useCallback(() => {
+      load();
+    }, [load])
+  );
 
   const throwFromDesk = async (id: number) => {
     Alert.alert('Remove from desk?', 'This will throw the letter away.', [

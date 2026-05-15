@@ -57,7 +57,7 @@ export default function MailboxScreen() {
         <TouchableOpacity onPress={() => Alert.alert('Settings', 'Coming soon')} style={styles.iconBtn}>
           <Text style={styles.icon}>⚙️</Text>
         </TouchableOpacity>
-        <TouchableOpacity onPress={logout} style={[styles.iconBtn, styles.profileBtn]}>
+        <TouchableOpacity onPress={() => router.push('/(app)/profile')} style={[styles.iconBtn, styles.profileBtn]}>
           <Text style={styles.profileText}>{user?.username?.[0]?.toUpperCase() ?? '?'}</Text>
         </TouchableOpacity>
       </View>
