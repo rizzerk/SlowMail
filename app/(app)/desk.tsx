@@ -10,6 +10,7 @@ import {
   View
 } from 'react-native';
 import { get, post } from '../../lib/api';
+import { addToTrash } from '../../lib/trash';
 import { Colors, envelopeColors } from '../../lib/theme';
 
 export default function DeskScreen() {
@@ -38,10 +39,12 @@ export default function DeskScreen() {
   );
 
   const throwFromDesk = async (id: number) => {
-    Alert.alert('Remove from desk?', 'This will throw the letter away.', [
+    Alert.alert('Move to trash?', 'You can restore it later or delete permanently.', [
       { text: 'Cancel', style: 'cancel' },
       {
-        text: 'Remove', style: 'destructive', onPress: async () => {
+        text: 'Trash', style: 'destructive', onPress: async () => {
+          const letter = letters.find(l => l.id === id);
+          if (letter) await addToTrash(letter);
           await post('letters/throw', {}, { id }).catch(() => {});
           setLetters(prev => prev.filter(l => l.id !== id));
         }

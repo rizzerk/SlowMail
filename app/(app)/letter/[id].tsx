@@ -5,6 +5,7 @@ import {
 } from 'react-native';
 import { router, useLocalSearchParams } from 'expo-router';
 import { get, post } from '../../../lib/api';
+import { addToTrash } from '../../../lib/trash';
 import { Colors, envelopeColors } from '../../../lib/theme';
 
 export default function LetterScreen() {
@@ -31,11 +32,12 @@ export default function LetterScreen() {
     }
   };
 
-  const handleThrow = async () => {
-    Alert.alert('Throw away?', 'This letter will be gone forever.', [
+  const handleTrash = async () => {
+    Alert.alert('Move to trash?', 'You can restore it later or delete permanently.', [
       { text: 'Cancel', style: 'cancel' },
       {
-        text: 'Throw', style: 'destructive', onPress: async () => {
+        text: 'Trash', style: 'destructive', onPress: async () => {
+          await addToTrash(letter);
           await post('letters/throw', {}, { id }).catch(() => {});
           router.back();
         }
@@ -55,14 +57,12 @@ export default function LetterScreen() {
 
   return (
     <View style={[styles.container, { backgroundColor: bgColor }]}>
-      {/* Top bar */}
       <View style={styles.topBar}>
         <TouchableOpacity onPress={() => router.back()} style={styles.closeBtn}>
           <Text style={styles.redX}>✕</Text>
         </TouchableOpacity>
       </View>
 
-      {/* Letter paper */}
       <ScrollView style={styles.paperScroll} contentContainerStyle={styles.paperContent}>
         <View style={styles.paper}>
           <Text style={styles.heartIcon}>🩷</Text>
@@ -71,19 +71,18 @@ export default function LetterScreen() {
         </View>
       </ScrollView>
 
-      {/* Actions */}
       <View style={styles.actions}>
         {kept ? (
-          <View style={styles.keptNote}>
-            <Text style={styles.keptNoteText}>📚 saved to desk</Text>
-          </View>
+          <TouchableOpacity style={[styles.actionBtn, styles.trashBtn]} onPress={handleTrash}>
+            <Text style={styles.actionBtnText}>🗑 Trash</Text>
+          </TouchableOpacity>
         ) : (
           <>
-            <TouchableOpacity style={[styles.actionBtn, styles.throwBtn]} onPress={handleThrow}>
-              <Text style={styles.actionBtnText}>Throw</Text>
+            <TouchableOpacity style={[styles.actionBtn, styles.trashBtn]} onPress={handleTrash}>
+              <Text style={styles.actionBtnText}>🗑 Trash</Text>
             </TouchableOpacity>
             <TouchableOpacity style={[styles.actionBtn, styles.keepBtn]} onPress={handleKeep}>
-              <Text style={styles.actionBtnText}>Keep</Text>
+              <Text style={styles.actionBtnText}>📚 Keep</Text>
             </TouchableOpacity>
           </>
         )}
@@ -108,9 +107,7 @@ const styles = StyleSheet.create({
   fromLine:    { fontFamily: 'PressStart', fontSize: 13, color: Colors.darkInk, marginTop: 24, fontWeight: 'bold' },
   actions:     { flexDirection: 'row', justifyContent: 'center', gap: 20, paddingVertical: 20, paddingHorizontal: 40 },
   actionBtn:   { flex: 1, paddingVertical: 12, borderRadius: 24, alignItems: 'center', borderWidth: 2, borderColor: Colors.darkInk },
-  throwBtn:    { backgroundColor: Colors.throwRed },
+  trashBtn:    { backgroundColor: Colors.throwRed },
   keepBtn:     { backgroundColor: Colors.keepGreen },
-  actionBtnText:{ fontFamily: 'PressStart', fontWeight: 'bold', fontSize: 15, color: Colors.darkInk },
-  keptNote:    { alignItems: 'center', padding: 12 },
-  keptNoteText:{ fontFamily: 'PressStart', fontSize: 14, color: Colors.darkInk },
+  actionBtnText:{ fontFamily: 'PressStart', fontWeight: 'bold', fontSize: 12, color: Colors.darkInk },
 });

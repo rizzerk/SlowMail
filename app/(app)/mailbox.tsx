@@ -55,7 +55,7 @@ export default function MailboxScreen() {
       {/* Top bar */}
       <View style={styles.topBar}>
         <TouchableOpacity onPress={() => Alert.alert('Settings', 'Coming soon')} style={styles.iconBtn}>
-          <Text style={styles.icon}>⚙️</Text>
+          <Image source={require('../../assets/images/setting.png')} style={styles.settingIcon} />
         </TouchableOpacity>
         <TouchableOpacity onPress={() => router.push('/(app)/profile')} style={[styles.iconBtn, styles.profileBtn]}>
           <Text style={styles.profileText}>{user?.username?.[0]?.toUpperCase() ?? '?'}</Text>
@@ -116,7 +116,7 @@ const styles = StyleSheet.create({
   container:    { flex: 1, backgroundColor: Colors.skyBlue },
   topBar:       { flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', paddingTop: 56, paddingHorizontal: 20, paddingBottom: 12 },
   iconBtn:      { padding: 6 },
-  icon:         { fontSize: 26 },
+  settingIcon:  { width: 30, height: 30 },
   profileBtn:   { backgroundColor: Colors.yellow, borderRadius: 8, borderWidth: 2, borderColor: Colors.darkInk, width: 40, height: 40, justifyContent: 'center', alignItems: 'center' },
   profileText:  { fontFamily: 'PressStart', fontWeight: 'bold', fontSize: 18, color: Colors.darkInk },
   center:       { flex: 1, alignItems: 'center', justifyContent: 'center' },
