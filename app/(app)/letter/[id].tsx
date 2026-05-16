@@ -32,25 +32,28 @@ export default function LetterScreen() {
 
   const handleKeep = async () => {
     try {
+      console.log('KEEP letter id:', id);
       await post('letters/keep', {}, { id });
       setKept(true);
       Alert.alert('📚 Kept', 'This letter is saved to your desk.');
-    } catch {
-      Alert.alert('Error', 'Could not keep letter.');
+    } catch (e: any) {
+      console.log('KEEP ERROR:', JSON.stringify(e.response?.data));
+      Alert.alert('Error', e.response?.data?.error || 'Could not keep letter.');
     }
   };
 
   const handleTrash = async () => {
-    Alert.alert('Move to trash?', 'You can restore it later or delete permanently.', [
-      { text: 'Cancel', style: 'cancel' },
-      {
-        text: 'Trash', style: 'destructive', onPress: async () => {
-          await addToTrash(letter);
-          await post('letters/throw', {}, { id }).catch(() => {});
-          router.back();
-        }
-      },
-    ]);
+    console.log('TRASHING letter:', JSON.stringify(letter));
+    try {
+      await addToTrash(letter);
+      console.log('Added to local trash successfully');
+    } catch (e: any) {
+      console.log('ADD TO TRASH ERROR:', e.message);
+    }
+    await post('letters/throw', {}, { id }).catch((e: any) => {
+      console.log('THROW ERROR:', JSON.stringify(e.response?.data));
+    });
+    router.back();
   };
 
   if (loading) return <View style={styles.center}><ActivityIndicator /></View>;
