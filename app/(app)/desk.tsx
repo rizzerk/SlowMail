@@ -39,17 +39,19 @@ export default function DeskScreen() {
   );
 
   const throwFromDesk = async (id: number) => {
-    Alert.alert('Move to trash?', 'You can restore it later or delete permanently.', [
-      { text: 'Cancel', style: 'cancel' },
-      {
-        text: 'Trash', style: 'destructive', onPress: async () => {
-          const letter = letters.find(l => l.id === id);
-          if (letter) await addToTrash(letter);
-          await post('letters/throw', {}, { id }).catch(() => {});
-          setLetters(prev => prev.filter(l => l.id !== id));
-        }
-      },
-    ]);
+    const letter = letters.find(l => l.id === id);
+    if (letter) {
+      try {
+        await addToTrash(letter);
+        console.log('Added to local trash from desk');
+      } catch (e: any) {
+        console.log('ADD TO TRASH ERROR:', e.message);
+      }
+    }
+    await post('letters/throw', {}, { id }).catch((e: any) => {
+      console.log('THROW FROM DESK ERROR:', JSON.stringify(e.response?.data));
+    });
+    setLetters(prev => prev.filter(l => l.id !== id));
   };
 
   return (
