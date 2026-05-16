@@ -1,16 +1,10 @@
-import { router } from 'expo-router';
-import { useCallback, useState } from 'react';
+import { useEffect, useState, useCallback } from 'react';
 import {
-  Alert,
-  FlatList,
-  Image,
-  RefreshControl,
-  StyleSheet,
-  Text,
-  TouchableOpacity,
-  View
+  View, Text, StyleSheet, TouchableOpacity,
+  FlatList, RefreshControl, Alert, Image
 } from 'react-native';
-import { clearAuth, get, getUser, post } from '../../lib/api';
+import { router } from 'expo-router';
+import api, { get, post, clearAuth, getUser } from '../../lib/api';
 import { Colors, envelopeColors } from '../../lib/theme';
 
 type Letter = {
@@ -33,22 +27,17 @@ export default function MailboxScreen() {
     try {
       const { data } = await get('mailbox');
       setLetters(data);
-    } catch (e: any) {
-      console.log('MAILBOX ERROR:', e.message, JSON.stringify(e.response?.data));
+    } catch {
+      // token expired
     } finally {
       setLoading(false);
     }
   }, []);
 
-  useFocusEffect(
-    useCallback(() => {
-      getUser().then(setUser);
-      load();
-  
-      // optional cleanup
-      return () => {};
-    }, [])
-  );
+  useEffect(() => {
+    getUser().then(setUser);
+    load();
+  }, []);
 
   const logout = async () => {
     await post('auth/logout').catch(() => {});
@@ -101,7 +90,7 @@ export default function MailboxScreen() {
               <TouchableOpacity
                 style={[styles.envelope, { backgroundColor: envelopeColors[item.envelope_style] ?? Colors.parchment }]}
                 onPress={() => router.push(`/(app)/letter/${item.id}`)}
-                >
+              >
                 <View style={styles.envelopeInner}>
                   <Text style={styles.fromText}>from: {item.from}</Text>
                   <Text style={styles.previewText} numberOfLines={1}>
@@ -127,7 +116,7 @@ const styles = StyleSheet.create({
   container:    { flex: 1, backgroundColor: Colors.skyBlue },
   topBar:       { flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', paddingTop: 56, paddingHorizontal: 20, paddingBottom: 12 },
   iconBtn:      { padding: 6 },
-  settingIcon:  { width: 70, height: 70 },
+  settingIcon:  { width: 30, height: 30 },
   profileBtn:   { backgroundColor: Colors.yellow, borderRadius: 8, borderWidth: 2, borderColor: Colors.darkInk, width: 40, height: 40, justifyContent: 'center', alignItems: 'center' },
   profileText:  { fontFamily: 'PressStart', fontWeight: 'bold', fontSize: 18, color: Colors.darkInk },
   center:       { flex: 1, alignItems: 'center', justifyContent: 'center' },

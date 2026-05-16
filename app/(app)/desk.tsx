@@ -11,6 +11,7 @@ import {
 } from 'react-native';
 import { get, post } from '../../lib/api';
 import { Colors, envelopeColors } from '../../lib/theme';
+import { addToTrash } from '../../lib/trash';
 
 export default function DeskScreen() {
   const [letters, setLetters] = useState<any[]>([]);
@@ -37,11 +38,13 @@ export default function DeskScreen() {
     }, [load])
   );
 
-  const throwLetter = async (id: number) => {
-    Alert.alert('Move to Trash?', 'This letter will go to the trash.', [
+  const throwFromDesk = async (id: number) => {
+    Alert.alert('Move to trash?', 'You can restore it later or delete permanently.', [
       { text: 'Cancel', style: 'cancel' },
       {
-        text: 'Remove', style: 'destructive', onPress: async () => {
+        text: 'Trash', style: 'destructive', onPress: async () => {
+          const letter = letters.find(l => l.id === id);
+          if (letter) await addToTrash(letter);
           await post('letters/throw', {}, { id }).catch(() => {});
           setLetters(prev => prev.filter(l => l.id !== id));
           setSelected(null);

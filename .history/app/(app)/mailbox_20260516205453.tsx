@@ -1,5 +1,5 @@
 import { router } from 'expo-router';
-import { useCallback, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import {
   Alert,
   FlatList,
@@ -33,22 +33,17 @@ export default function MailboxScreen() {
     try {
       const { data } = await get('mailbox');
       setLetters(data);
-    } catch (e: any) {
-      console.log('MAILBOX ERROR:', e.message, JSON.stringify(e.response?.data));
+    } catch {
+      // token expired
     } finally {
       setLoading(false);
     }
   }, []);
 
-  useFocusEffect(
-    useCallback(() => {
-      getUser().then(setUser);
-      load();
-  
-      // optional cleanup
-      return () => {};
-    }, [])
-  );
+  useEffect(() => {
+    getUser().then(setUser);
+    load();
+  }, []);
 
   const logout = async () => {
     await post('auth/logout').catch(() => {});
@@ -101,7 +96,7 @@ export default function MailboxScreen() {
               <TouchableOpacity
                 style={[styles.envelope, { backgroundColor: envelopeColors[item.envelope_style] ?? Colors.parchment }]}
                 onPress={() => router.push(`/(app)/letter/${item.id}`)}
-                >
+              >
                 <View style={styles.envelopeInner}>
                   <Text style={styles.fromText}>from: {item.from}</Text>
                   <Text style={styles.previewText} numberOfLines={1}>

@@ -10,11 +10,10 @@ export default function AppLayout() {
         headerShown: false,
         tabBarShowLabel: false,
         tabBarStyle: {
-          backgroundColor: Colors.skyBlue,
+          backgroundColor: Colors.cream,
+          borderTopWidth: 2,
+          borderTopColor: Colors.darkInk,
           height: 70,
-          borderTopWidth: 0,
-elevation: 0,
-shadowOpacity: 0,
         },
         tabBarActiveTintColor: Colors.darkInk,
         tabBarInactiveTintColor: Colors.mutedInk,
@@ -39,25 +38,11 @@ shadowOpacity: 0,
       <Tabs.Screen
         name="compose"
         options={{
-          tabBarStyle: {
-            backgroundColor: Colors.cream,
-            borderTopWidth: 0,
-elevation: 0,
-shadowOpacity: 0,
-          },
           tabBarIcon: ({ focused }) => (
             <Image source={require('../../assets/images/quillandink.png')} style={{ width: 60, height: 60, opacity: focused ? 1 : 0.4 }} />
           ),
         }}
       />
-
-      <Tabs.Screen
-  name="trash"
-  options={{
-    tabBarIcon: ({ focused }) => (
-      <Image source={require('../../assets/images/trash.png')} style={{ width: 60, height: 60, opacity: focused ? 1 : 0.4 }} />
-    ),
-  }} />
       <Tabs.Screen
         name="outbox"
         options={{ href: null }}
@@ -72,11 +57,7 @@ shadowOpacity: 0,
       />
       <Tabs.Screen
         name="profile"
-        options={{ href: null, tabBarStyle: {
-          backgroundColor: Colors.cream,
-          borderTopWidth: 0,
-elevation: 0,
-shadowOpacity: 0,}, headerShown: false }}
+        options={{ href: null, headerShown: false }}
       />
       {/* Hidden screens — not in tab bar */}
       <Tabs.Screen name="letter/[id]" options={{ href: null }} />
