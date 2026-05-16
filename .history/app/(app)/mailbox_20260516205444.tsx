@@ -122,7 +122,7 @@ const styles = StyleSheet.create({
   container:    { flex: 1, backgroundColor: Colors.skyBlue },
   topBar:       { flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', paddingTop: 56, paddingHorizontal: 20, paddingBottom: 12 },
   iconBtn:      { padding: 6 },
-  settingIcon:  { width: 70, height: 70 },
+  settingIcon:  { width: 60, height: 60 },
   profileBtn:   { backgroundColor: Colors.yellow, borderRadius: 8, borderWidth: 2, borderColor: Colors.darkInk, width: 40, height: 40, justifyContent: 'center', alignItems: 'center' },
   profileText:  { fontFamily: 'PressStart', fontWeight: 'bold', fontSize: 18, color: Colors.darkInk },
   center:       { flex: 1, alignItems: 'center', justifyContent: 'center' },
