@@ -22,6 +22,12 @@ shadowOpacity: 0,
       <Tabs.Screen
         name="mailbox"
         options={{
+          tabBarStyle: {
+            backgroundColor: Colors.skyBlue,
+            borderTopWidth: 0,
+elevation: 0,
+shadowOpacity: 0,
+          },
           tabBarIcon: ({ focused }) => (
             <Image source={focused ? require('../../assets/images/notempty.png') : require('../../assets/images/empty.png')} style={{ width: 40, height: 40, opacity: focused ? 1 : 0.4 }} />
           ),
@@ -30,6 +36,12 @@ shadowOpacity: 0,
       <Tabs.Screen
         name="desk"
         options={{
+          tabBarStyle: {
+            backgroundColor: Colors.skyBlue,
+            borderTopWidth: 0,
+      elevation: 0,
+      shadowOpacity: 0,
+          },
           tabBarIcon: ({ focused }) => (
             <Image source={require('../../assets/images/desk.png')} style={{ width: 60, height: 60, opacity: focused ? 1 : 0.4 }} />
           ),
@@ -53,6 +65,12 @@ shadowOpacity: 0,
       <Tabs.Screen
   name="trash"
   options={{
+    tabBarStyle: {
+      backgroundColor: Colors.cream,
+      borderTopWidth: 0,
+elevation: 0,
+shadowOpacity: 0,
+    },
     tabBarIcon: ({ focused }) => (
       <Image source={require('../../assets/images/trash.png')} style={{ width: 60, height: 60, opacity: focused ? 1 : 0.4 }} />
     ),

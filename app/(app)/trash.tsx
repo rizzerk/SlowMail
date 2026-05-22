@@ -68,7 +68,6 @@ export default function TrashScreen() {
         ListEmptyComponent={
           !loading ? (
             <View style={styles.emptyBox}>
-              <Text style={styles.emptyIcon}>✨</Text>
               <Text style={styles.emptyText}>Trash is empty.</Text>
             </View>
           ) : null
