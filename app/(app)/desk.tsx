@@ -2,8 +2,7 @@ import { useFocusEffect } from 'expo-router';
 import { useCallback, useState } from 'react';
 import {
   Alert,
-  FlatList,
-  Modal,
+  FlatList, Image, Modal,
   RefreshControl,
   ScrollView,
   StyleSheet,
@@ -50,7 +49,6 @@ export default function DeskScreen() {
     <View style={styles.container}>
       <View style={styles.topBar}>
         <Text style={styles.title}>My Desk</Text>
-        <Text style={styles.deskEmoji}>🪴</Text>
       </View>
       <Text style={styles.subtitle}>
         {letters.length === 0 ? 'No kept letters yet.' : `${letters.length} letter${letters.length !== 1 ? 's' : ''} kept`}
@@ -64,8 +62,8 @@ export default function DeskScreen() {
         ListEmptyComponent={
           !loading ? (
             <View style={styles.emptyBox}>
-              <Text style={styles.emptyIcon}>📭</Text>
-              <Text style={styles.emptyText}>Letters you keep will appear here.</Text>
+            <Image source={require('../../assets/images/empty.png')} style={{ width: 60, height: 60}} />
+            <Text style={styles.emptyText}>Letters you keep will appear here.</Text>
             </View>
           ) : null
         }
@@ -113,33 +111,35 @@ export default function DeskScreen() {
 }
 
 const styles = StyleSheet.create({
-  container:     { flex: 1, backgroundColor: Colors.cream },
-  topBar:        { flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', paddingTop: 56, paddingHorizontal: 20, paddingBottom: 4 },
-  title:         { fontFamily: 'monospace', fontWeight: 'bold', fontSize: 22, color: Colors.darkInk },
-  deskEmoji:     { fontSize: 30 },
-  subtitle:      { fontFamily: 'monospace', fontSize: 12, color: Colors.mutedInk, paddingHorizontal: 20, marginBottom: 8 },
+  container:  { flex: 1, backgroundColor: Colors.skyBlue },
   listContent:   { padding: 16, paddingBottom: 40, flexGrow: 1 },
   emptyBox:      { flex: 1, alignItems: 'center', justifyContent: 'center', paddingTop: 80 },
   emptyIcon:     { fontSize: 48, marginBottom: 12 },
-  emptyText:     { fontFamily: 'monospace', fontSize: 13, color: Colors.mutedInk, textAlign: 'center' },
-  card:          { backgroundColor: Colors.white, borderRadius: 10, borderWidth: 1.5, borderColor: Colors.darkInk, borderLeftWidth: 6, padding: 14, marginBottom: 12, position: 'relative' },
-  cardHeader:    { flexDirection: 'row', justifyContent: 'space-between', marginBottom: 6 },
-  fromText:      { fontFamily: 'monospace', fontWeight: 'bold', fontSize: 13, color: Colors.darkInk },
-  dateText:      { fontFamily: 'monospace', fontSize: 11, color: Colors.mutedInk },
-  previewText:   { fontFamily: 'monospace', fontSize: 12, color: Colors.mutedInk, lineHeight: 18, paddingRight: 30 },
-  trashBtn:      { position: 'absolute', bottom: 10, right: 12 },
-  trashIcon:     { fontSize: 18 },
+  emptyText:     {  fontFamily: 'PressStart', fontSize: 13, color: Colors.darkInk, lineHeight: 20 , textAlign: 'center' },
+  topBar:     { flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', paddingTop: 56, paddingHorizontal: 20, paddingBottom: 4 },
+  title:      { fontFamily: 'PressStart', fontWeight: 'bold', fontSize: 22, color: Colors.darkInk },
+  deskImgContainer: { alignItems: 'center', justifyContent: 'center', flex: 1 },
+  deskImg:    { width: 300, height: 300 },
+  subtitle:   { fontFamily: 'PressStart', fontSize: 12, color: Colors.mutedInk, paddingHorizontal: 20, marginBottom: 8, textAlign: 'center' },
+  card:       { backgroundColor: Colors.white, borderRadius: 10, borderWidth: 1.5, borderColor: Colors.darkInk, padding: 14, marginBottom: 12, position: 'relative' },
+  cardHeader: { flexDirection: 'row', justifyContent: 'space-between', marginBottom: 6 },
+  fromText:   { fontFamily: 'PressStart', fontWeight: 'bold', fontSize: 13, color: Colors.darkInk },
+  dateText:   { fontFamily: 'PressStart', fontSize: 11, color: Colors.mutedInk },
+  bodyText:   { fontFamily: 'PressStart', fontSize: 13, color: Colors.darkInk, lineHeight: 20 },
+  previewText:{ fontFamily: 'PressStart', fontSize: 12, color: Colors.mutedInk, lineHeight: 18 },
+  trashBtn:   { position: 'absolute', bottom: 10, right: 12 },
+  trashIcon:  { fontSize: 18 },
+  closeBtn:   { alignItems: 'center', paddingVertical: 14 },
+  closeBtnText: { fontFamily: 'PressStart', fontSize: 12, color: Colors.darkInk, textDecorationLine: 'underline' },
   // Modal
   modalContainer:{ flex: 1 },
   modalTopBar:   { flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', paddingTop: 56, paddingHorizontal: 20, paddingBottom: 12 },
-  closeBtn:      { padding: 4 },
   redX:          { fontSize: 22, color: Colors.redX, fontWeight: 'bold' },
   trashBtnModal: { padding: 4 },
   paperScroll:   { flex: 1, marginHorizontal: 20, marginBottom: 8 },
   paperContent:  { paddingBottom: 16 },
   paper:         { backgroundColor: Colors.cream, borderWidth: 2, borderColor: Colors.darkInk, borderRadius: 4, padding: 20, minHeight: 400 },
   heartIcon:     { position: 'absolute', top: 14, right: 14, fontSize: 22 },
-  bodyText:      { fontFamily: 'monospace', fontSize: 13, color: Colors.darkInk, lineHeight: 22, marginTop: 8 },
-  fromLine:      { fontFamily: 'monospace', fontSize: 13, color: Colors.darkInk, marginTop: 24, fontWeight: 'bold' },
-  keptAtText:    { fontFamily: 'monospace', fontSize: 11, color: Colors.mutedInk, marginTop: 8 },
+  fromLine:      { fontFamily: 'PressStart', fontSize: 13, color: Colors.darkInk, marginTop: 24, fontWeight: 'bold' },
+  keptAtText:    { fontFamily: 'PressStart', fontSize: 11, color: Colors.mutedInk, marginTop: 8 },
 });
