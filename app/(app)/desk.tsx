@@ -17,6 +17,8 @@ export default function DeskScreen() {
   const [letters, setLetters]   = useState<any[]>([]);
   const [loading, setLoading]   = useState(false);
   const [selected, setSelected] = useState<any>(null); // for modal preview
+  const [opened, setOpened] = useState(false);
+
 
   const load = useCallback(async () => {
     setLoading(true);
@@ -50,6 +52,19 @@ export default function DeskScreen() {
       <View style={styles.topBar}>
         <Text style={styles.title}>My Desk</Text>
       </View>
+
+      {!opened ? (
+        <View style={styles.deskImgContainer}>
+          <TouchableOpacity onPress={() => { setOpened(true); load(); }}>
+            <Image source={require('../../assets/images/desk.png')} style={styles.deskImg} />
+          </TouchableOpacity>
+          <Text style={styles.subtitle}>
+            {letters.length === 0 ? 'Your desk is empty.' : `${letters.length} kept letter${letters.length !== 1 ? 's' : ''} — tap to view`}
+          </Text>
+        </View>
+      ) : (
+        <>
+
       <Text style={styles.subtitle}>
         {letters.length === 0 ? 'No kept letters yet.' : `${letters.length} letter${letters.length !== 1 ? 's' : ''} kept`}
       </Text>
@@ -85,6 +100,10 @@ export default function DeskScreen() {
         )}
       />
 
+<TouchableOpacity onPress={() => setOpened(false)} style={styles.closeBtn}>
+            <Text style={styles.closeBtnText}>← Back</Text>
+          </TouchableOpacity>
+
       {/* Letter Preview Modal */}
       <Modal visible={!!selected} animationType="slide" onRequestClose={() => setSelected(null)}>
         <View style={[styles.modalContainer, { backgroundColor: selected ? (envelopeColors[selected.envelope_style] ?? Colors.parchment) : Colors.cream }]}>
@@ -106,6 +125,8 @@ export default function DeskScreen() {
           </ScrollView>
         </View>
       </Modal>
+      </>
+      )}
     </View>
   );
 }
