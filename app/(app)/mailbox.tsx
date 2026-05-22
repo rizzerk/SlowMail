@@ -2,7 +2,9 @@ import { router, useFocusEffect } from 'expo-router';
 import { useCallback, useState } from 'react';
 import {
   Alert,
-  FlatList, RefreshControl,
+  FlatList,
+  Image,
+  RefreshControl,
   StyleSheet,
   Text,
   TouchableOpacity,
@@ -65,7 +67,7 @@ export default function MailboxScreen() {
       {/* Top bar */}
       <View style={styles.topBar}>
         <TouchableOpacity onPress={() => Alert.alert('Settings', 'Coming soon')} style={styles.iconBtn}>
-          <Text style={styles.icon}>⚙️</Text>
+          <Image source={require('../../assets/images/setting.png')} style={styles.settingIcon} />
         </TouchableOpacity>
         <TouchableOpacity onPress={() => router.push('/(app)/profile')} style={[styles.iconBtn, styles.profileBtn]}>
           <Text style={styles.profileText}>{user?.username?.[0]?.toUpperCase() ?? '?'}</Text>
@@ -75,8 +77,8 @@ export default function MailboxScreen() {
       {!opened ? (
         /* Mailbox closed — tap to collect */
         <View style={styles.center}>
-          <Text style={styles.pixelMailbox}>📬</Text>
-          <Text style={styles.tapHint}>tap to check your mail</Text>
+          <Image source={letters.length > 0 ? require('../../assets/images/notempty.png') : require('../../assets/images/empty.png')} style={styles.mailboxImg} />
+          <Text style={styles.tapHint}>{letters.length > 0 ? `${letters.length} letter${letters.length > 1 ? 's' : ''} waiting!` : 'No mail today'}</Text>
           <TouchableOpacity style={styles.collectBtn} onPress={openMailbox}>
             <Text style={styles.collectText}>Open Mailbox</Text>
           </TouchableOpacity>
@@ -126,24 +128,24 @@ const styles = StyleSheet.create({
   container:    { flex: 1, backgroundColor: Colors.skyBlue },
   topBar:       { flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', paddingTop: 56, paddingHorizontal: 20, paddingBottom: 12 },
   iconBtn:      { padding: 6 },
-  icon:         { fontSize: 26 },
+  settingIcon:  { width: 70, height: 70 },
   profileBtn:   { backgroundColor: Colors.yellow, borderRadius: 8, borderWidth: 2, borderColor: Colors.darkInk, width: 40, height: 40, justifyContent: 'center', alignItems: 'center' },
-  profileText:  { fontFamily: 'monospace', fontWeight: 'bold', fontSize: 18, color: Colors.darkInk },
+  profileText:  { fontFamily: 'PressStart', fontWeight: 'bold', fontSize: 18, color: Colors.darkInk },
   center:       { flex: 1, alignItems: 'center', justifyContent: 'center' },
-  pixelMailbox: { fontSize: 100, marginBottom: 12 },
-  tapHint:      { fontFamily: 'monospace', fontSize: 13, color: Colors.white, marginBottom: 20, opacity: 0.85 },
+  mailboxImg: { width: 200, height: 200, marginBottom: 12 },
+  tapHint:      { fontFamily: 'PressStart', fontSize: 13, color: Colors.white, marginBottom: 20, opacity: 0.85 },
   collectBtn:   { backgroundColor: Colors.cream, borderRadius: 24, paddingVertical: 12, paddingHorizontal: 28, borderWidth: 2, borderColor: Colors.darkInk },
-  collectText:  { fontFamily: 'monospace', fontWeight: 'bold', fontSize: 14, color: Colors.darkInk },
+  collectText:  { fontFamily: 'PressStart', fontWeight: 'bold', fontSize: 14, color: Colors.darkInk },
   badge:        { position: 'absolute', top: -10, right: -10, backgroundColor: Colors.redX, borderRadius: 12, width: 24, height: 24, justifyContent: 'center', alignItems: 'center' },
   badgeText:    { color: Colors.white, fontSize: 12, fontWeight: 'bold' },
   listWrapper:  { flex: 1, backgroundColor: Colors.cream, borderTopLeftRadius: 24, borderTopRightRadius: 24, padding: 20, marginTop: 8 },
-  sectionTitle: { fontFamily: 'monospace', fontWeight: 'bold', fontSize: 15, color: Colors.darkInk, marginBottom: 14 },
+  sectionTitle: { fontFamily: 'PressStart', fontWeight: 'bold', fontSize: 15, color: Colors.darkInk, marginBottom: 14 },
   envelope:     { borderRadius: 12, borderWidth: 2, borderColor: Colors.darkInk, padding: 14, marginBottom: 12, flexDirection: 'row', alignItems: 'center' },
   envelopeInner:{ flex: 1 },
-  fromText:     { fontFamily: 'monospace', fontSize: 12, color: Colors.mutedInk, marginBottom: 2 },
-  previewText:  { fontFamily: 'monospace', fontSize: 13, color: Colors.darkInk },
+  fromText:     { fontFamily: 'PressStart', fontSize: 12, color: Colors.mutedInk, marginBottom: 2 },
+  previewText:  { fontFamily: 'PressStart', fontSize: 13, color: Colors.darkInk },
   keptBadge:    { marginTop: 4, alignSelf: 'flex-start', backgroundColor: Colors.keepGreen, borderRadius: 8, paddingHorizontal: 6, paddingVertical: 2 },
   stamp:        { fontSize: 24, marginLeft: 8 },
   closeBtn:     { alignItems: 'center', paddingVertical: 10 },
-  closeBtnText: { fontFamily: 'monospace', fontSize: 12, color: Colors.mutedInk, textDecorationLine: 'underline' },
+  closeBtnText: { fontFamily: 'PressStart', fontSize: 12, color: Colors.mutedInk, textDecorationLine: 'underline' },
 });
