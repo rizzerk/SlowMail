@@ -12,7 +12,7 @@ import {
   View
 } from 'react-native';
 import { get, post } from '../../lib/api';
-import { Colors, envelopeColors } from '../../lib/theme';
+import { Colors, Fonts, envelopeColors } from '../../lib/theme';
 
 export default function TrashScreen() {
   const [letters, setLetters]   = useState<any[]>([]);
@@ -127,22 +127,22 @@ export default function TrashScreen() {
 const styles = StyleSheet.create({ 
   container:     { flex: 1, backgroundColor: Colors.cream},
   topBar:        { flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', paddingTop: 56, paddingHorizontal: 20, paddingBottom: 4 },
-  title:         { fontFamily: 'PressStart', fontWeight: 'bold', fontSize: 22, color: Colors.darkInk },
-  subtitle:      { fontFamily: 'PressStart', fontSize: 12, color: Colors.mutedInk, paddingHorizontal: 20, marginBottom: 8 },
+  title:         { fontFamily: Fonts.pixel, fontWeight: 'bold', fontSize: 22, color: Colors.darkInk },
+  subtitle:      { fontFamily: Fonts.pixel, fontSize: 12, color: Colors.mutedInk, paddingHorizontal: 20, marginBottom: 8 },
   listContent:   { padding: 16, paddingBottom: 40, flexGrow: 1 },
   emptyBox:      { flex: 1, alignItems: 'center', justifyContent: 'center', paddingTop: 80 },
   emptyIcon:     { fontSize: 48, marginBottom: 12 },
-  emptyText:     { fontFamily: 'PressStart', fontSize: 13, color: Colors.mutedInk },
+  emptyText:     { fontFamily: Fonts.pixel, fontSize: 13, color: Colors.mutedInk },
   card:          { backgroundColor: Colors.white, borderRadius: 10, borderWidth: 1.5, borderColor: Colors.darkInk, borderLeftWidth: 6, padding: 14, marginBottom: 12 },
   cardHeader:    { flexDirection: 'row', justifyContent: 'space-between', marginBottom: 6 },
-  fromText:      { fontFamily: 'PressStart', fontWeight: 'bold', fontSize: 13, color: Colors.darkInk },
-  dateText:      { fontFamily: 'PressStart', fontSize: 11, color: Colors.mutedInk },
-  previewText:   { fontFamily: 'PressStart', fontSize: 12, color: Colors.mutedInk, lineHeight: 18, marginBottom: 8 },
+  fromText:      { fontFamily: Fonts.pixel, fontWeight: 'bold', fontSize: 13, color: Colors.darkInk },
+  dateText:      { fontFamily: Fonts.pixel, fontSize: 11, color: Colors.mutedInk },
+  previewText:   { fontFamily: Fonts.pixel, fontSize: 12, color: Colors.mutedInk, lineHeight: 18, marginBottom: 8 },
   actionRow:     { flexDirection: 'row', gap: 10, marginTop: 4 },
   restoreBtn:    { backgroundColor: Colors.keepGreen, borderRadius: 12, paddingHorizontal: 10, paddingVertical: 4, borderWidth: 1, borderColor: Colors.darkInk },
-  restoreText:   { fontFamily: 'PressStart', fontSize: 11, color: Colors.darkInk },
+  restoreText:   { fontFamily: Fonts.pixel, fontSize: 11, color: Colors.darkInk },
   deleteBtn:     { backgroundColor: Colors.throwRed, borderRadius: 12, paddingHorizontal: 10, paddingVertical: 4, borderWidth: 1, borderColor: Colors.darkInk },
-  deleteText:    { fontFamily: 'PressStart', fontSize: 11, color: Colors.darkInk },
+  deleteText:    { fontFamily: Fonts.pixel, fontSize: 11, color: Colors.darkInk },
   // Modal
   modalContainer:{ flex: 1 },
   modalTopBar:   { flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', paddingTop: 56, paddingHorizontal: 20, paddingBottom: 12 },
@@ -152,7 +152,7 @@ const styles = StyleSheet.create({
   paperScroll:   { flex: 1, marginHorizontal: 20, marginBottom: 8 },
   paperContent:  { paddingBottom: 16 },
   paper:         { backgroundColor: Colors.cream, borderWidth: 2, borderColor: Colors.darkInk, borderRadius: 4, padding: 20, minHeight: 400 },
-  bodyText:      { fontFamily: 'PressStart', fontSize: 13, color: Colors.darkInk, lineHeight: 22, marginTop: 8 },
-  fromLine:      { fontFamily: 'PressStart', fontSize: 13, color: Colors.darkInk, marginTop: 24, fontWeight: 'bold' },
-  trashedAtText: { fontFamily: 'PressStart', fontSize: 11, color: Colors.mutedInk, marginTop: 8 },
+  bodyText:      { fontFamily: Fonts.pixel, fontSize: 13, color: Colors.darkInk, lineHeight: 22, marginTop: 8 },
+  fromLine:      { fontFamily: Fonts.pixel, fontSize: 13, color: Colors.darkInk, marginTop: 24, fontWeight: 'bold' },
+  trashedAtText: { fontFamily: Fonts.pixel, fontSize: 11, color: Colors.mutedInk, marginTop: 8 },
 });

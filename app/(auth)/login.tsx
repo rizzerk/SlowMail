@@ -9,7 +9,7 @@ import {
   View
 } from 'react-native';
 import { post, saveAuth } from '../../lib/api';
-import { Colors } from '../../lib/theme';
+import { Colors, Fonts } from '../../lib/theme';
 
 export default function LoginScreen() {
   const [email, setEmail]       = useState('');
@@ -90,17 +90,17 @@ export default function LoginScreen() {
 const styles = StyleSheet.create({
   bg:         { flex: 1, backgroundColor: Colors.skyBlue, justifyContent: 'center', alignItems: 'center' },
   card:       { backgroundColor: Colors.cream, borderRadius: 32, borderWidth: 4, borderColor: Colors.darkInk, padding: 28, width: '85%' },
-  title:      { fontFamily: 'PressStart', fontSize: 18, textAlign: 'center', marginBottom: 24, color: Colors.darkInk },
-  label:      { fontFamily: 'PressStart', fontSize: 8, color: Colors.darkInk, marginBottom: 6 },
-  input:      { fontFamily: 'PressStart', borderBottomWidth: 3, borderColor: Colors.darkInk, paddingVertical: 8, fontSize: 10, marginBottom: 18, color: Colors.darkInk },
+  title:      { fontFamily: Fonts.pixel, fontSize: 18, textAlign: 'center', marginBottom: 24, color: Colors.darkInk },
+  label:      { fontFamily: Fonts.pixel, fontSize: 8, color: Colors.darkInk, marginBottom: 6 },
+  input:      { fontFamily: Fonts.pixel, borderBottomWidth: 3, borderColor: Colors.darkInk, paddingVertical: 8, fontSize: 10, marginBottom: 18, color: Colors.darkInk },
   pwRow:      { flexDirection: 'row', alignItems: 'center' },
   eyeBtn:     { paddingHorizontal: 8, paddingBottom: 16 },
   eyeIcon:    { fontSize: 16 },
-  forgot:     { fontFamily: 'PressStart', fontSize: 7, color: Colors.darkInk, textDecorationLine: 'underline', textAlign: 'center', marginBottom: 18 },
+  forgot:     { fontFamily: Fonts.pixel, fontSize: 7, color: Colors.darkInk, textDecorationLine: 'underline', textAlign: 'center', marginBottom: 18 },
   signInBtn:  { backgroundColor: Colors.yellow, borderRadius: 28, paddingVertical: 14, alignItems: 'center', borderWidth: 3, borderColor: Colors.darkInk, marginBottom: 18 },
-  signInText: { fontFamily: 'PressStart', fontSize: 10, color: Colors.darkInk },
+  signInText: { fontFamily: Fonts.pixel, fontSize: 10, color: Colors.darkInk },
   signUpRow:  { flexDirection: 'row', justifyContent: 'center', alignItems: 'center' },
-  noAccount:  { fontFamily: 'PressStart', fontSize: 7, color: Colors.darkInk },
+  noAccount:  { fontFamily: Fonts.pixel, fontSize: 7, color: Colors.darkInk },
   signUpBtn:  { borderWidth: 3, borderColor: Colors.darkInk, borderRadius: 28, paddingHorizontal: 14, paddingVertical: 8 },
-  signUpText: { fontFamily: 'PressStart', fontSize: 7, color: Colors.darkInk },
+  signUpText: { fontFamily: Fonts.pixel, fontSize: 7, color: Colors.darkInk },
 });

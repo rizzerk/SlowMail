@@ -15,7 +15,7 @@ export const Colors = {
 };
 
 export const Fonts = {
-  pixel: 'monospace', // Replace with a pixel font if you add one
+  pixel: 'PressStart',
 };
 
 export const envelopeColors: Record<string, string> = {

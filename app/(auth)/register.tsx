@@ -9,7 +9,7 @@ import {
   View
 } from 'react-native';
 import { post, saveAuth } from '../../lib/api';
-import { Colors } from '../../lib/theme';
+import { Colors, Fonts } from '../../lib/theme';
 
 export default function RegisterScreen() {
   const [username, setUsername] = useState('');
@@ -69,10 +69,10 @@ const styles = StyleSheet.create({
   bg:      { flex: 1, backgroundColor: Colors.skyBlue },
   scroll:  { flexGrow: 1, justifyContent: 'center', alignItems: 'center', padding: 24 },
   card:    { backgroundColor: Colors.cream, borderRadius: 32, borderWidth: 4, borderColor: Colors.darkInk, padding: 28, width: '100%' },
-  title:   { fontFamily: 'PressStart', fontSize: 16, textAlign: 'center', marginBottom: 24, color: Colors.darkInk },
-  label:   { fontFamily: 'PressStart', fontSize: 8, color: Colors.darkInk, marginBottom: 6 },
-  input:   { fontFamily: 'PressStart', borderBottomWidth: 3, borderColor: Colors.darkInk, paddingVertical: 8, fontSize: 10, marginBottom: 18, color: Colors.darkInk },
+  title:   { fontFamily: Fonts.pixel, fontSize: 16, textAlign: 'center', marginBottom: 24, color: Colors.darkInk },
+  label:   { fontFamily: Fonts.pixel, fontSize: 8, color: Colors.darkInk, marginBottom: 6 },
+  input:   { fontFamily: Fonts.pixel, borderBottomWidth: 3, borderColor: Colors.darkInk, paddingVertical: 8, fontSize: 10, marginBottom: 18, color: Colors.darkInk },
   btn:     { backgroundColor: Colors.yellow, borderRadius: 28, paddingVertical: 14, alignItems: 'center', borderWidth: 3, borderColor: Colors.darkInk, marginTop: 4 },
-  btnText: { fontFamily: 'PressStart', fontSize: 9, color: Colors.darkInk },
-  back:    { fontFamily: 'PressStart', fontSize: 7, color: Colors.darkInk, textDecorationLine: 'underline' },
+  btnText: { fontFamily: Fonts.pixel, fontSize: 9, color: Colors.darkInk },
+  back:    { fontFamily: Fonts.pixel, fontSize: 7, color: Colors.darkInk, textDecorationLine: 'underline' },
 });

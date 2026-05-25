@@ -11,7 +11,7 @@ import {
   View
 } from 'react-native';
 import api, { clearAuth, get, getUser } from '../../lib/api';
-import { Colors, envelopeColors } from '../../lib/theme';
+import { Colors, Fonts, envelopeColors } from '../../lib/theme';
 
 type Letter = {
   id: number;
@@ -130,22 +130,22 @@ const styles = StyleSheet.create({
   iconBtn:      { padding: 6 },
   settingIcon:  { width: 70, height: 70 },
   profileBtn:   { backgroundColor: Colors.yellow, borderRadius: 8, borderWidth: 2, borderColor: Colors.darkInk, width: 40, height: 40, justifyContent: 'center', alignItems: 'center' },
-  profileText:  { fontFamily: 'PressStart', fontWeight: 'bold', fontSize: 18, color: Colors.darkInk },
+  profileText:  { fontFamily: Fonts.pixel, fontWeight: 'bold', fontSize: 18, color: Colors.darkInk },
   center:       { flex: 1, alignItems: 'center', justifyContent: 'center' },
   mailboxImg: { width: 200, height: 200, marginBottom: 12 },
-  tapHint:      { fontFamily: 'PressStart', fontSize: 13, color: Colors.white, marginBottom: 20, opacity: 0.85 },
+  tapHint:      { fontFamily: Fonts.pixel, fontSize: 13, color: Colors.white, marginBottom: 20, opacity: 0.85 },
   collectBtn:   { backgroundColor: Colors.cream, borderRadius: 24, paddingVertical: 12, paddingHorizontal: 28, borderWidth: 2, borderColor: Colors.darkInk },
-  collectText:  { fontFamily: 'PressStart', fontWeight: 'bold', fontSize: 14, color: Colors.darkInk },
+  collectText:  { fontFamily: Fonts.pixel, fontWeight: 'bold', fontSize: 14, color: Colors.darkInk },
   badge:        { position: 'absolute', top: -10, right: -10, backgroundColor: Colors.redX, borderRadius: 12, width: 24, height: 24, justifyContent: 'center', alignItems: 'center' },
   badgeText:    { color: Colors.white, fontSize: 12, fontWeight: 'bold' },
   listWrapper:  { flex: 1, backgroundColor: Colors.cream, borderTopLeftRadius: 24, borderTopRightRadius: 24, padding: 20, marginTop: 8 },
-  sectionTitle: { fontFamily: 'PressStart', fontWeight: 'bold', fontSize: 15, color: Colors.darkInk, marginBottom: 14 },
+  sectionTitle: { fontFamily: Fonts.pixel, fontWeight: 'bold', fontSize: 15, color: Colors.darkInk, marginBottom: 14 },
   envelope:     { borderRadius: 12, borderWidth: 2, borderColor: Colors.darkInk, padding: 14, marginBottom: 12, flexDirection: 'row', alignItems: 'center' },
   envelopeInner:{ flex: 1 },
-  fromText:     { fontFamily: 'PressStart', fontSize: 12, color: Colors.mutedInk, marginBottom: 2 },
-  previewText:  { fontFamily: 'PressStart', fontSize: 13, color: Colors.darkInk },
+  fromText:     { fontFamily: Fonts.pixel, fontSize: 12, color: Colors.mutedInk, marginBottom: 2 },
+  previewText:  { fontFamily: Fonts.pixel, fontSize: 13, color: Colors.darkInk },
   keptBadge:    { marginTop: 4, alignSelf: 'flex-start', backgroundColor: Colors.keepGreen, borderRadius: 8, paddingHorizontal: 6, paddingVertical: 2 },
   stamp:        { fontSize: 24, marginLeft: 8 },
   closeBtn:     { alignItems: 'center', paddingVertical: 10 },
-  closeBtnText: { fontFamily: 'PressStart', fontSize: 12, color: Colors.mutedInk, textDecorationLine: 'underline' },
+  closeBtnText: { fontFamily: Fonts.pixel, fontSize: 12, color: Colors.mutedInk, textDecorationLine: 'underline' },
 });

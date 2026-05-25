@@ -11,7 +11,7 @@ import {
   View
 } from 'react-native';
 import { get, post } from '../../lib/api';
-import { Colors, envelopeColors } from '../../lib/theme';
+import { Colors, Fonts, envelopeColors } from '../../lib/theme';
 
 export default function DeskScreen() {
   const [letters, setLetters]   = useState<any[]>([]);
@@ -136,22 +136,22 @@ const styles = StyleSheet.create({
   listContent:   { padding: 16, paddingBottom: 40, flexGrow: 1 },
   emptyBox:      { flex: 1, alignItems: 'center', justifyContent: 'center', paddingTop: 80 },
   emptyIcon:     { fontSize: 48, marginBottom: 12 },
-  emptyText:     {  fontFamily: 'PressStart', fontSize: 13, color: Colors.darkInk, lineHeight: 20 , textAlign: 'center' },
+  emptyText:     {  fontFamily: Fonts.pixel, fontSize: 13, color: Colors.darkInk, lineHeight: 20 , textAlign: 'center' },
   topBar:     { flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', paddingTop: 56, paddingHorizontal: 20, paddingBottom: 4 },
-  title:      { fontFamily: 'PressStart', fontWeight: 'bold', fontSize: 22, color: Colors.darkInk },
+  title:      { fontFamily: Fonts.pixel, fontWeight: 'bold', fontSize: 22, color: Colors.darkInk },
   deskImgContainer: { alignItems: 'center', justifyContent: 'center', flex: 1 },
   deskImg:    { width: 300, height: 300 },
-  subtitle:   { fontFamily: 'PressStart', fontSize: 12, color: Colors.mutedInk, paddingHorizontal: 20, marginBottom: 8, textAlign: 'center' },
+  subtitle:   { fontFamily: Fonts.pixel, fontSize: 12, color: Colors.mutedInk, paddingHorizontal: 20, marginBottom: 8, textAlign: 'center' },
   card:       { backgroundColor: Colors.white, borderRadius: 10, borderWidth: 1.5, borderColor: Colors.darkInk, padding: 14, marginBottom: 12, position: 'relative' },
   cardHeader: { flexDirection: 'row', justifyContent: 'space-between', marginBottom: 6 },
-  fromText:   { fontFamily: 'PressStart', fontWeight: 'bold', fontSize: 13, color: Colors.darkInk },
-  dateText:   { fontFamily: 'PressStart', fontSize: 11, color: Colors.mutedInk },
-  bodyText:   { fontFamily: 'PressStart', fontSize: 13, color: Colors.darkInk, lineHeight: 20 },
-  previewText:{ fontFamily: 'PressStart', fontSize: 12, color: Colors.mutedInk, lineHeight: 18 },
+  fromText:   { fontFamily: Fonts.pixel, fontWeight: 'bold', fontSize: 13, color: Colors.darkInk },
+  dateText:   { fontFamily: Fonts.pixel, fontSize: 11, color: Colors.mutedInk },
+  bodyText:   { fontFamily: Fonts.pixel, fontSize: 13, color: Colors.darkInk, lineHeight: 20 },
+  previewText:{ fontFamily: Fonts.pixel, fontSize: 12, color: Colors.mutedInk, lineHeight: 18 },
   trashBtn:   { position: 'absolute', bottom: 10, right: 12 },
   trashIcon:  { fontSize: 18 },
   closeBtn:   { alignItems: 'center', paddingVertical: 14 },
-  closeBtnText: { fontFamily: 'PressStart', fontSize: 12, color: Colors.darkInk, textDecorationLine: 'underline' },
+  closeBtnText: { fontFamily: Fonts.pixel, fontSize: 12, color: Colors.darkInk, textDecorationLine: 'underline' },
   // Modal
   modalContainer:{ flex: 1 },
   modalTopBar:   { flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', paddingTop: 56, paddingHorizontal: 20, paddingBottom: 12 },
@@ -161,6 +161,6 @@ const styles = StyleSheet.create({
   paperContent:  { paddingBottom: 16 },
   paper:         { backgroundColor: Colors.cream, borderWidth: 2, borderColor: Colors.darkInk, borderRadius: 4, padding: 20, minHeight: 400 },
   heartIcon:     { position: 'absolute', top: 14, right: 14, fontSize: 22 },
-  fromLine:      { fontFamily: 'PressStart', fontSize: 13, color: Colors.darkInk, marginTop: 24, fontWeight: 'bold' },
-  keptAtText:    { fontFamily: 'PressStart', fontSize: 11, color: Colors.mutedInk, marginTop: 8 },
+  fromLine:      { fontFamily: Fonts.pixel, fontSize: 13, color: Colors.darkInk, marginTop: 24, fontWeight: 'bold' },
+  keptAtText:    { fontFamily: Fonts.pixel, fontSize: 11, color: Colors.mutedInk, marginTop: 8 },
 });

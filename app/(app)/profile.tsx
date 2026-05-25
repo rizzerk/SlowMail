@@ -11,7 +11,7 @@ import {
   View
 } from 'react-native';
 import { clearAuth, getUser, post, saveAuth } from '../../lib/api';
-import { Colors } from '../../lib/theme';
+import { Colors, Fonts } from '../../lib/theme';
 
 export default function ProfileScreen() {
   const [user, setUser]         = useState<any>(null);
@@ -143,18 +143,18 @@ export default function ProfileScreen() {
 const styles = StyleSheet.create({
   container:    { flex: 1, backgroundColor: Colors.cream },
   topBar:       { flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', paddingTop: 56, paddingHorizontal: 20, paddingBottom: 12 },
-  title:        { fontFamily: 'PressStart', fontWeight: 'bold', fontSize: 18, color: Colors.darkInk },
-  back:         { fontFamily: 'PressStart', fontSize: 13, color: Colors.mutedInk },
-  editBtn:      { fontFamily: 'PressStart', fontSize: 13, color: Colors.darkInk, textDecorationLine: 'underline' },
+  title:        { fontFamily: Fonts.pixel, fontWeight: 'bold', fontSize: 18, color: Colors.darkInk },
+  back:         { fontFamily: Fonts.pixel, fontSize: 13, color: Colors.mutedInk },
+  editBtn:      { fontFamily: Fonts.pixel, fontSize: 13, color: Colors.darkInk, textDecorationLine: 'underline' },
   avatarRow:    { alignItems: 'center', marginVertical: 20 },
   avatar:       { backgroundColor: Colors.yellow, borderRadius: 50, width: 80, height: 80, justifyContent: 'center', alignItems: 'center', borderWidth: 2, borderColor: Colors.darkInk },
-  avatarText:   { fontFamily: 'PressStart', fontWeight: 'bold', fontSize: 36, color: Colors.darkInk },
+  avatarText:   { fontFamily: Fonts.pixel, fontWeight: 'bold', fontSize: 36, color: Colors.darkInk },
   card:         { margin: 20, backgroundColor: Colors.white, borderRadius: 16, borderWidth: 2, borderColor: Colors.darkInk, padding: 20 },
-  fieldLabel:   { fontFamily: 'PressStart', fontSize: 11, color: Colors.mutedInk, marginTop: 12, marginBottom: 2 },
-  fieldValue:   { fontFamily: 'PressStart', fontSize: 15, color: Colors.darkInk },
-  input:        { borderBottomWidth: 1.5, borderColor: Colors.darkInk, paddingVertical: 6, fontSize: 14, fontFamily: 'PressStart', color: Colors.darkInk, marginBottom: 4 },
+  fieldLabel:   { fontFamily: Fonts.pixel, fontSize: 11, color: Colors.mutedInk, marginTop: 12, marginBottom: 2 },
+  fieldValue:   { fontFamily: Fonts.pixel, fontSize: 15, color: Colors.darkInk },
+  input:        { borderBottomWidth: 1.5, borderColor: Colors.darkInk, paddingVertical: 6, fontSize: 14, fontFamily: Fonts.pixel, color: Colors.darkInk, marginBottom: 4 },
   saveBtn:      { backgroundColor: Colors.yellow, borderRadius: 24, paddingVertical: 12, alignItems: 'center', borderWidth: 2, borderColor: Colors.darkInk, marginTop: 16 },
-  saveBtnText:  { fontFamily: 'PressStart', fontWeight: 'bold', fontSize: 14, color: Colors.darkInk },
+  saveBtnText:  { fontFamily: Fonts.pixel, fontWeight: 'bold', fontSize: 14, color: Colors.darkInk },
   logoutBtn:    { margin: 20, backgroundColor: Colors.throwRed, borderRadius: 24, paddingVertical: 14, alignItems: 'center', borderWidth: 2, borderColor: Colors.darkInk },
-  logoutText:   { fontFamily: 'PressStart', fontWeight: 'bold', fontSize: 15, color: Colors.darkInk },
+  logoutText:   { fontFamily: Fonts.pixel, fontWeight: 'bold', fontSize: 15, color: Colors.darkInk },
 });
