@@ -198,14 +198,6 @@ eas build -p android --profile preview
 
 ---
 
-## Authors
-
-- Name 1
-- Name 2
-- Name 3
-
----
-
 ## Asset Attribution
 
 The visual assets used in this project are **not owned by the authors**. They are used strictly for academic and portfolio purposes — this project is non-commercial and will not be publicly distributed or monetized.
