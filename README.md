@@ -183,6 +183,7 @@ Scan the QR code with **Expo Go** on your phone, or press `i` for iOS simulator 
 ```bash
 eas build -p android --profile preview
 ```
+Or download the latest APK directly from the [Releases page](https://github.com/yourusername/SlowMail/releases/latest).
 
 ---
 
