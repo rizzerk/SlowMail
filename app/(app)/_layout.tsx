@@ -25,8 +25,8 @@ shadowOpacity: 0,
           tabBarStyle: {
             backgroundColor: Colors.skyBlue,
             borderTopWidth: 0,
-elevation: 0,
-shadowOpacity: 0,
+            elevation: 0,
+            shadowOpacity: 0,
           },
           tabBarIcon: ({ focused }) => (
             <Image source={focused ? require('../../assets/images/notempty.png') : require('../../assets/images/empty.png')} style={{ width: 40, height: 40, opacity: focused ? 1 : 0.4 }} />
@@ -85,8 +85,8 @@ shadowOpacity: 0,
         options={{ href: null, tabBarStyle: {
           backgroundColor: Colors.cream,
           borderTopWidth: 0,
-elevation: 0,
-shadowOpacity: 0,}, headerShown: false }}
+          elevation: 0,
+          shadowOpacity: 0,}, headerShown: false }}
       />
       {/* Hidden screens — not in tab bar */}
       <Tabs.Screen name="letter/[id]" options={{ href: null }} />
